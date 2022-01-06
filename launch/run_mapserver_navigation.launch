@@ -1,0 +1,14 @@
+<launch>
+    <!-- gazebo -->
+    <include file="$(find test_simulations)/launch/gazebo.launch"/>
+
+    <!-- Map server -->
+    <arg name="map_file" default="$(find turtlebot3_navigation)/maps/map.yaml"/>
+    <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>
+
+    <!-- navigation -->
+    <include file="$(find test_simulations)/launch/navigation.launch"/>
+
+    <!-- rviz -->
+    <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find test_simulations)/rviz/navigation.rviz"/>
+</launch>
